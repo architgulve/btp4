@@ -1,0 +1,72 @@
+{
+  "nodes": [
+    {
+      "id": "a",
+      "label": "Graphs Overview",
+      "title": "Graphs Overview",
+      "content": "This note gives an overview of graphs and links to [[DFS]], [[BFS]], and [[Graph Traversal]].",
+      "createdAt": "2025-04-13T09:00:00Z"
+    },
+    {
+      "id": "b",
+      "label": "DFS",
+      "title": "DFS",
+      "content": "Depth-first search is a traversal algorithm that explores as far as possible before backtracking.",
+      "createdAt": "2025-04-13T09:10:00Z"
+    },
+    {
+      "id": "c",
+      "label": "BFS",
+      "title": "BFS",
+      "content": "Breadth-first search explores all neighbors before going deeper.",
+      "createdAt": "2025-04-13T09:20:00Z"
+    },
+    {
+      "id": "d",
+      "label": "Graph Representation",
+      "title": "Graph Representation",
+      "content": "Graphs can be represented using adjacency lists, matrices, or edge lists.",
+      "createdAt": "2025-04-13T09:30:00Z"
+    },
+    {
+      "id": "e",
+      "label": "Use Cases",
+      "title": "Use Cases",
+      "content": "Graphs are used in social networks, routing, recommendation systems, etc.",
+      "createdAt": "2025-04-13T09:40:00Z"
+    },
+    {
+      "id": "f",
+      "label": "Graph Traversal",
+      "title": "Graph Traversal",
+      "content": "Overview of different graph traversal techniques like [[DFS]] and [[BFS]].",
+      "createdAt": "2025-04-13T09:50:00Z"
+    },
+    {
+      "id": "g",
+      "label": "Adjacency Matrix",
+      "title": "Adjacency Matrix",
+      "content": "One way to represent a graph, especially useful for dense graphs.",
+      "createdAt": "2025-04-13T10:00:00Z"
+    },
+    {
+      "id": "h",
+      "label": "Real-world Graphs",
+      "title": "Real-world Graphs",
+      "content": "Discussion of how graphs are used in real-world apps.",
+      "createdAt": "2025-04-13T10:10:00Z"
+    }
+  ],
+  "links": [
+    { "source": "a", "target": "b" },
+    { "source": "a", "target": "c" },
+    { "source": "a", "target": "f" },
+    { "source": "a", "target": "h" },
+    { "source": "b", "target": "f" },
+    { "source": "c", "target": "f" },
+    { "source": "g", "target": "d" },
+    { "source": "c", "target": "e" },
+    { "source": "b", "target": "g" },
+    { "source": "g", "target": "h" }
+  ]
+}
