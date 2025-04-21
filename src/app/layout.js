@@ -1,7 +1,7 @@
 import "./globals.css";
-import Link from "next/link";
-import { LucideIcon, LucidePlus, LucideSearch } from "lucide-react";
-import Sidebar from "../../components/sidebar";
+// import Link from "next/link";
+// import { LucideIcon, LucidePlus, LucideSearch } from "lucide-react";
+// import Sidebar from "../../components/sidebar";
 
 export default function RootLayout({ children }) {
   return (
