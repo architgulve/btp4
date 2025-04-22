@@ -4,7 +4,6 @@ import * as d3 from "d3";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-// Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const EpidemicGraph = () => {
@@ -44,26 +43,22 @@ const EpidemicGraph = () => {
     setGraphData({ nodes, links });
     setStats(initialStats);
     setTime(0);
-    setHistory([{ time: 0, ...initialStats }]); // Initialize history with first data point
+    setHistory([{ time: 0, ...initialStats }]);
   };
 
-  // Calculate statistics
   const calculateStats = (nodes) => {
     const counts = { S: 0, I: 0, R: 0 };
     nodes.forEach((node) => counts[node.status]++);
     return counts;
   };
 
-  // Run simulation step
   const runSimulationStep = () => {
     setGraphData((prev) => {
       const newNodes = [...prev.nodes];
       const newLinks = [...prev.links];
 
-      // Spread infection
       newNodes.forEach((node) => {
         if (node.status === "I") {
-          // Find neighbors
           const neighbors = new Set();
           prev.links.forEach((link) => {
             const sourceId =
@@ -75,7 +70,6 @@ const EpidemicGraph = () => {
             if (targetId === node.id) neighbors.add(sourceId);
           });
 
-          // Infect neighbors
           neighbors.forEach((neighborId) => {
             const neighbor = newNodes.find((n) => n.id === neighborId);
             if (neighbor?.status === "S" && Math.random() < infectionRate) {
@@ -83,7 +77,6 @@ const EpidemicGraph = () => {
             }
           });
 
-          // Recover
           if (Math.random() < recoveryRate) {
             node.status = "R";
           }
@@ -95,36 +88,34 @@ const EpidemicGraph = () => {
       
       setStats(newStats);
       setTime(newTime);
-      
-      // Update history
+
       setHistory(prev => [...prev, { time: newTime, ...newStats }]);
       
       return { nodes: newNodes, links: newLinks };
     });
   };
 
-  // Prepare data for the chart
   const chartData = {
     labels: history.map(point => point.time),
     datasets: [
       {
         label: 'Susceptible',
         data: history.map(point => point.S),
-        borderColor: '#3B82F6', // blue-500
+        borderColor: '#3B82F6', 
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         tension: 0.1
       },
       {
         label: 'Infected',
         data: history.map(point => point.I),
-        borderColor: '#EF4444', // red-500
+        borderColor: '#EF4444', 
         backgroundColor: 'rgba(239, 68, 68, 0.1)',
         tension: 0.1
       },
       {
         label: 'Recovered',
         data: history.map(point => point.R),
-        borderColor: '#10B981', // green-500
+        borderColor: '#10B981', 
         backgroundColor: 'rgba(16, 185, 129, 0.1)',
         tension: 0.1
       }
@@ -159,19 +150,16 @@ const EpidemicGraph = () => {
     }
   };
 
-  // Initialize graph
   useEffect(() => {
     generateGraph();
   }, [numNodes]);
 
-  // Run simulation when started
   useEffect(() => {
     if (!isRunning) return;
     const interval = setInterval(runSimulationStep, 100);
     return () => clearInterval(interval);
   }, [isRunning, infectionRate, recoveryRate]);
 
-  // Draw graph with D3
   useEffect(() => {
     if (!svgRef.current || graphData.nodes.length === 0) return;
 
@@ -193,7 +181,6 @@ const EpidemicGraph = () => {
       .force("charge", d3.forceManyBody().strength(-5000/numNodes))
       .force("center", d3.forceCenter(width / 1.7, height / 2.7));
 
-    // Draw links
     const link = svg
       .append("g")
       .selectAll("line")
@@ -204,7 +191,6 @@ const EpidemicGraph = () => {
       .attr("stroke-opacity", 0.6)
       .attr("stroke-width", 1);
 
-    // Draw nodes
     const node = svg
       .append("g")
       .selectAll("circle")
@@ -215,11 +201,11 @@ const EpidemicGraph = () => {
       .attr("fill", (d) => {
         switch (d.status) {
           case "I":
-            return "#EF4444"; // red-700
+            return "#EF4444"; 
           case "R":
-            return "#10B981"; // emerald-700
+            return "#10B981"; 
           default:
-            return "#3B82F6"; // blue-700
+            return "#3B82F6"; 
         }
       });
 
@@ -314,10 +300,8 @@ const EpidemicGraph = () => {
                 Reset
               </button>
             </div>
-            {/* <div className="text-sm text-white">Time: {time}</div> */}
           </div>
 
-          {/* Add Plot Graph button */}
           <button
             onClick={() => setShowChart(!showChart)}
             className="px-4 py-2 bg-purple-700 hover:bg-purple-600 text-white rounded-md mt-4"
@@ -335,8 +319,7 @@ const EpidemicGraph = () => {
               className="bg-neutral-800 rounded-lg"
             ></svg>
           </div>
-          
-          {/* Conditionally render the chart */}
+
           {showChart && (
             <div className="bg-neutral-800 p-4 rounded-lg shadow">
               <Line data={chartData} options={chartOptions} />
