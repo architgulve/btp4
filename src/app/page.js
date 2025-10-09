@@ -18,7 +18,6 @@ const EpidemicGraph = () => {
   const [history, setHistory] = useState([]);
   const [showChart, setShowChart] = useState(false);
 
-  // Generate graph data
   const generateGraph = () => {
     const nodes = Array.from({ length: numNodes }, (_, i) => ({
       id: i,
@@ -225,7 +224,7 @@ const EpidemicGraph = () => {
   return (
     <div className="h-screen w-screen">
       <h1 className="text-3xl font-bold text-center">
-        Epidemic Graph Simulation
+    
       </h1>
       <div className="flex flex-row w-screen justify-center">
         <div className="flex flex-col w-1/4 justify-between p-5">
